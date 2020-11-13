@@ -20,9 +20,7 @@ public:
 	
 	MyClass operator- ()
 	{
-		float xx = -x;
-		float yy = -y;
-		return MyClass(xx,yy);
+		return MyClass(-x,-y);
 	}
 	float x,y;
 private:
@@ -33,12 +31,12 @@ using namespace std;
 
 int main()
 {
-	negate<MyClass> nn;
 	MyClass aMyClass, bMyClass;
 	aMyClass.x = 1;
 	aMyClass.y = 5;
 	bMyClass.x = 3;
 	bMyClass.y = 3;
+
 
 	cout << aMyClass.x << " "<< aMyClass.y<<endl;
 	cout << (-aMyClass).x  << (-aMyClass).y<<endl;

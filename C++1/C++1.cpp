@@ -60,18 +60,11 @@ int main()
     cout << n << endl;
 
 	string s = "abcdefg";
-	char& a = s[2];
-	char& b = s[3];
-	a = '1';
-	b = '2';
-
+	char a[256] = "";
+	sprintf_s(a, sizeof(a), "%f %f ", vecFloat[0], vecFloat[1]);
+	s += a;
 	cout << s << endl;
-	cout << (int*)s.c_str() << endl;
 
-	s = "pppppppppppppppppppppppp";
-
-	cout << s << endl;
-	cout << (int*)s.c_str() << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

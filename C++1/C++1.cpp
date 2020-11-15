@@ -8,40 +8,35 @@
 #include <stdlib.h>
 #include <functional>
 
-class MyClass
+class Point
 {
 public:
-	MyClass():x(0.f),y(0.f){};
-	MyClass(float xin, float yin) { x = xin; y = yin; }
-	bool operator() (MyClass& A)
-	{
-		return A.x > x && A.y > y;
-	}
+	Point():x(0.f),y(0.f){};
+	Point(float xin, float yin) { x = xin; y = yin; }
+	bool operator() (Point& A){return A.x > x && A.y > y;}
 	
-	MyClass operator- ()
-	{
-		return MyClass(-x,-y);
-	}
-	float x,y;
+	Point operator- (){return Point(-x,-y);}
+	float& X() { return x; }
+	float& Y() { return y; }
 private:
-	
+	float x,y;
 };
 
 using namespace std;
 
 int main()
 {
-	MyClass aMyClass, bMyClass;
-	aMyClass.x = 1;
-	aMyClass.y = 5;
-	bMyClass.x = 3;
-	bMyClass.y = 3;
+	Point Pt_a, Pt_y;
+	Pt_a.X() = 1.f;
+	Pt_a.Y() = 5;
+	Pt_y.X() = 3;
+	Pt_y.Y() = 3;
 
 
-	cout << aMyClass.x << " "<< aMyClass.y<<endl;
-	cout << (-aMyClass).x  << (-aMyClass).y<<endl;
-	cout << aMyClass.x << " " << aMyClass.y << endl;
-	vector<MyClass> v;
+	cout << Pt_a.X() << " "<< Pt_a.Y() <<endl;
+	cout << (-Pt_a).X() << (-Pt_a).Y() <<endl;
+	cout << Pt_a.X() << " " << Pt_a.Y() << endl;
+	vector<Point> v;
 
 
     vector<float> vecFloat = {1.1,-1.1,3.4,-3.4,5.5,-5.5,7.9,-7.9};

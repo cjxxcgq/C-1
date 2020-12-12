@@ -1,6 +1,6 @@
 ﻿// ConsoleApplication4.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-
+#include<atltrace.h>
 #include <iostream>
 #include <vector>
 #include <list>
@@ -13,11 +13,12 @@ class Point
 public:
 	Point():x(0.f),y(0.f){};
 	Point(float xin, float yin) { x = xin; y = yin; }
-	bool operator() (Point& A){return A.x > x && A.y > y;}
+	bool operator< (Point& A){return x < A.x && y < A.y;}
 	
 	Point operator- (){return Point(-x,-y);}
 	float& X() { return x; }
 	float& Y() { return y; }
+	static bool SortPoint(Point ptA, Point ptB) { return ptA < ptB; }
 private:
 	float x,y;
 };
@@ -26,37 +27,36 @@ using namespace std;
 
 int main()
 {
-	Point Pt_a, Pt_y;
-	Pt_a.X() = 1.f;
-	Pt_a.Y() = 5;
+	Point Pt_a(1.f,5.f), Pt_y;
 	Pt_y.X() = 3;
 	Pt_y.Y() = 3;
 
 
-	cout << Pt_a.X() << " "<< Pt_a.Y() <<endl;
-	cout << (-Pt_a).X() << (-Pt_a).Y() <<endl;
-	cout << Pt_a.X() << " " << Pt_a.Y() << endl;
-	vector<Point> v;
-
+	ATLTRACE("Output Pt: (%7.2f,%7.2f)\n",Pt_a.X(), Pt_a.Y());
+	ATLTRACE("Output -Pt: (%7.2f,%7.2f)\n",(-Pt_a).X(),(-Pt_a).Y());
+	ATLTRACE("Output Pt: (%7.2f,%7.2f)\n", Pt_a.X(), Pt_a.Y());
 
     vector<float> vecFloat = {1.1,-1.1,3.4,-3.4,5.5,-5.5,7.9,-7.9};
+	vector<Point> vPt = { {1,-2},{-3,-4} ,{-5,-6},{7,8} };
     list<float> listFloat;
 
     sort(vecFloat.begin(), vecFloat.end());
-    int n = count(vecFloat.begin(), vecFloat.end(),55);
+	sort(vPt.begin(), vPt.end());
+	reverse(vPt.begin(), vPt.end());
+	sort(vPt.begin(), vPt.end(), Point::SortPoint);
+    int n = count(vecFloat.begin(), vecFloat.end(),5.5);
     vector<float>::iterator itor = vecFloat.begin();
     
     for (;itor!=vecFloat.end();itor++)
     {
-        cout << (*itor) <<" ceil "<<ceil(*itor) << " floor "<< floor(*itor)<< " round " <<round(*itor) << " nearbyint " << nearbyint(*itor) << endl;
+        ATLTRACE("%7.2f   ceil:%7.2f   floor:%7.2f   round:%7.2f   nearbyint:%7.2f\n", (*itor),ceil(*itor),floor(*itor),round(*itor),nearbyint(*itor));
     }
-    cout << n << endl;
-
+  
 	string s = "abcdefg";
 	char a[256] = "";
 	sprintf_s(a, sizeof(a), "%f %f ", vecFloat[0], vecFloat[1]);
 	s += a;
-	cout << s << endl;
+	ATLTRACE2("%s",s.data());
 
 }
 

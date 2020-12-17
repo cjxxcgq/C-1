@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <functional>
+#include <map>
+
+using namespace std;
 
 class Point
 {
@@ -23,7 +26,13 @@ private:
 	float x,y;
 };
 
-using namespace std;
+class SteelBarBase
+{
+public:
+protected:
+private:
+};
+
 
 int main()
 {

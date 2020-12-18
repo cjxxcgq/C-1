@@ -43,16 +43,19 @@ void Lambda()
 	auto lFunc = gFunc(4);        std::cout << lFunc(5) << std::endl;
 	auto hFunc = [](const function<int(int)>& f, int z) { return f(z) + 1; };
 	auto a = hFunc(gFunc(7), 8);
-	int a = 111, b = 222;
-	auto func = [=, &b]()mutable { a = 22; b = 333; std::cout << "a:" << a << " b:" << b << std::endl; };
-	func();
-	std::cout << "a:" << a << " b:" << b << std::endl;
-	a = 333;
-	auto func2 = [=, &a] { a = 444; std::cout << "a:" << a << " b:" << b << std::endl; };
-	func2();
-	auto func3 = [](int x) ->function<int(int)> { return [=](int y) { return x + y; }; };
 
-	std::function<void(int x)> f_display_42  = [](int x) { print_num(x); };
+	int aa = 111, bb = 222;
+	[=, &bb]()mutable { aa = 22; bb = 333; std::cout << "aa:" << aa << " bb:" << bb << std::endl; }();	
+	std::cout << "aa:" << aa << " bb:" << bb << std::endl;
+
+	a = 333;
+	[=, &a] { a = 444; std::cout << "a:" << a << " bb:" << bb << std::endl; }();
+
+	auto func3 = [](int x) ->function<int(int)> { return [=](int y) { return x + y; }; };
+	auto f = func3(10);
+	int ai = f(3);
+
+	std::function<void(int x)> f_display_42 = [](int x) {std::cout << "x:" << x;};
 	f_display_42(44);
 
 }
